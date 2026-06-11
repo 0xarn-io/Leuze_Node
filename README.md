@@ -15,7 +15,7 @@ a configurable **webhook**. A built-in **setup page** visualizes the live
 cross-section and edits the configuration.
 
 > The node only *listens* to the scanners' UDP data telegrams via
-> [pyRSL235](https://github.com/0xarn-io/pyRSL235). It is **not a safety
+> [leuze-rsl](https://pypi.org/project/leuze-rsl/). It is **not a safety
 > function** — OSSD/protective-field states are shown for diagnosis only.
 
 ## Quick start (no hardware required)
@@ -115,5 +115,5 @@ python -m unittest discover -s tests -v
 ```
 
 Geometry/state-machine/scene tests are dependency-free (stdlib +
-pyrsl235); the end-to-end API tests need `fastapi` + `httpx` and skip
+leuze-rsl); the end-to-end API tests need `fastapi` + `httpx` and skip
 otherwise.

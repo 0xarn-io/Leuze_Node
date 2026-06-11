@@ -1,11 +1,11 @@
 """Measurement core: per-laser workers + the gate state machine.
 
-``LaserWorker`` owns one :class:`pyrsl235.RSL235Udt` receiver and converts
+``LaserWorker`` owns one :class:`leuze_rsl.RSL235Udt` receiver and converts
 raw scans -- on the receiver thread -- into immutable ``LaserProfile``
 snapshots (foreground filtered, transformed to gate coordinates, ROI
 clipped).  ``GateEngine`` ticks at the configured sample rate, fuses the
 newest profile of every laser and drives the trigger/measure state
-machine.  Everything here is plain stdlib + pyrsl235 so it stays testable
+machine.  Everything here is plain stdlib + leuze-rsl so it stays testable
 without FastAPI; ``tick(now)`` is public for fake-clock tests.
 
 States: idle -> (POST /trigger) -> armed -> object present -> measuring
@@ -25,7 +25,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
-from pyrsl235 import RSL235Udt, UdtScan
+from leuze_rsl import RSL235Udt, UdtScan
 
 from config import Config, GateConfig, LaserConfig
 from events import EventQueue, WebhookPusher, utc_iso

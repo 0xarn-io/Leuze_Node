@@ -9,7 +9,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from pyrsl235 import RSL235Udt
+from leuze_rsl import RSL235Udt
 
 from config import Pose
 from mock import BoxPassScene, SceneUdtSimulator
