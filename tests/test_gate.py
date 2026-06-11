@@ -9,7 +9,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from pyrsl235.udt import MeasurementContour, UdtScan
+from leuze_rsl.udt import MeasurementContour, UdtScan
 
 from config import LaserConfig, Pose, Sector, build_config, load_config
 from events import EventQueue

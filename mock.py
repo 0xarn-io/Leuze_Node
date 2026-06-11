@@ -3,7 +3,7 @@
 ``BoxPassScene`` models the gate cross-section (side walls, belt plane,
 ceiling) plus one transient box that "rides through" for
 ``length / speed`` seconds.  ``SceneUdtSimulator`` subclasses the driver's
-wire-authentic :class:`pyrsl235.simulator.UdtSimulator` and only swaps the
+wire-authentic :class:`leuze_rsl.simulator.UdtSimulator` and only swaps the
 distance source for per-scan ray casts of the scene -- so the node under
 mock mode exercises the exact same UDP receive path as with real lasers.
 """
@@ -17,7 +17,7 @@ import threading
 import time
 from typing import Dict, List, Optional, Tuple
 
-from pyrsl235.simulator import UdtSimulator
+from leuze_rsl.simulator import UdtSimulator
 
 import gate as gate_mod
 from config import Config, Pose

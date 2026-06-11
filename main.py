@@ -14,12 +14,12 @@ import sys
 import time
 
 try:
-    import pyrsl235  # noqa: F401
-except ImportError:  # sibling checkout fallback, like pyRSL235/examples
-    _sibling = pathlib.Path(__file__).resolve().parent.parent / "pyRSL235"
-    if (_sibling / "pyrsl235").exists():
+    import leuze_rsl  # noqa: F401
+except ImportError:  # sibling checkout fallback for driver development
+    _sibling = pathlib.Path(__file__).resolve().parent.parent / "leuze-rsl"
+    if (_sibling / "leuze_rsl").exists():
         sys.path.insert(0, str(_sibling))
-    import pyrsl235  # noqa: F401
+    import leuze_rsl  # noqa: F401
 
 import logging
 from contextlib import asynccontextmanager
