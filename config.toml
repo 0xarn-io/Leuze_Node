@@ -1,0 +1,69 @@
+# RSL235_Node configuration.
+#
+# Coordinate frame (gate cross-section, looking along the conveyor):
+#   x [m]  across the belt, 0 = belt center, positive to the right
+#   z [m]  height above the belt surface (belt top = 0)
+# Each laser scans in this vertical plane; its pose places the device in
+# the frame and rotation_deg points the device front (beam angle 0).
+
+[node]
+gate_id = "gate-1"
+mock = true        # true: run 3 built-in scene simulators instead of real lasers
+
+[server]
+host = "0.0.0.0"
+port = 9020
+
+[[lasers]]
+id = "left"
+name = "Left"
+port = 3050        # UDP port this node listens on (destination port in Sensor Studio)
+source_ip = ""     # optional: only accept datagrams from this sender IP
+pose = { x_m = -1.0, z_m = 0.5, rotation_deg = 0.0, mirror = false }
+sector = { min_deg = -110.0, max_deg = 110.0 }
+
+[[lasers]]
+id = "top"
+name = "Top"
+port = 3051
+source_ip = ""
+pose = { x_m = 0.0, z_m = 2.0, rotation_deg = -90.0, mirror = false }
+sector = { min_deg = -110.0, max_deg = 110.0 }
+
+[[lasers]]
+id = "right"
+name = "Right"
+port = 3052
+source_ip = ""
+pose = { x_m = 1.0, z_m = 0.5, rotation_deg = 180.0, mirror = false }
+sector = { min_deg = -110.0, max_deg = 110.0 }
+
+[gate]
+roi = { x_min_m = -0.9, x_max_m = 0.9, z_min_m = 0.03, z_max_m = 1.9 }
+belt_z_m = 0.0
+conveyor_speed_mps = 0.5      # used for length unless the trigger supplies speed_mps
+sample_rate_hz = 40.0
+foreground_margin_mm = 60     # beam counts as foreground when this much shorter than baseline
+min_foreground_points = 12    # fused points needed to consider an object present
+outlier_trim_points = 1       # points trimmed from each end before width/height extents
+on_debounce_samples = 3
+off_debounce_samples = 5
+arm_timeout_s = 10.0          # ARMED -> timeout outcome when nothing shows up
+max_event_s = 30.0            # safety cap on a single measurement
+retrigger_holdoff_s = 0.5
+stale_after_s = 0.15          # ignore a laser whose newest profile is older than this
+baseline_scans = 25
+history_max = 200
+
+[webhook]
+url = ""                      # empty = disabled; measurements are always on GET /events
+timeout_s = 5.0
+retry_delays_s = [1.0, 3.0, 7.0]
+post_all_outcomes = false     # also POST timeout/aborted/sensor_loss outcomes
+
+[mock]
+auto_trigger = true           # demo loop: trigger + spawn a random box periodically
+box_period_s = 8.0
+seed = 0                      # 0 = random seed
+box_min = { w = 0.2, h = 0.15, l = 0.3 }
+box_max = { w = 0.8, h = 0.6, l = 1.2 }

@@ -1,0 +1,4 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+tomlkit>=0.13
+pyrsl235 @ git+https://github.com/0xarn-io/pyRSL235.git
